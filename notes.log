@@ -1,0 +1,25 @@
+What I did
+Set up termux
+Used my termianl tips for configuring vim 
+https://github.com/dnikic/terminal-developer-workflow/blob/main/README.md
+Downlaoded threejs example with curl
+curl https://github.com/mrdoob/three.js/blob/master/examples/webgl_decals.html -o index.html
+Ran an nodejs server 
+npm install http-server -g
+http-server -a localhost
+Opened localhost in Kiwi browser and enabled developer tools
+http://localhost:8080/
+Checked whats missing.
+Cloned the threejs repo and coppied whats missing to the adequate location mentioned in console errors in developer tools.
+Used "Material files" file browser for transfering iamge files to termux storage.
+
+TODO
+    Enable using other meshes
+        Add multiple asset files for different body parts
+    Enable uplaoding custom decals
+        https://stackoverflow.com/questions/50431636/load-texture-from-user-upload-to-geometry-in-three-js
+    /Enable rotating details
+    /Enable setting decal size
+
+
+
