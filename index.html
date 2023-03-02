@@ -87,6 +87,11 @@
 
 					removeDecals();
 
+				},
+				undo: function () {
+
+					undo();
+
 				}
 			};
 
@@ -260,10 +265,11 @@
 
 				const gui = new GUI();
 
+				gui.add( params, 'clear' );
 				gui.add( params, 'scale', 1, 30 );
 				gui.add( params, 'rotation', -1, 1 );
 				//gui.add( params, 'rotate' );
-				gui.add( params, 'clear' );
+				gui.add( params, 'undo' );
 				gui.open();
 
 			}
@@ -323,6 +329,18 @@
 				decals.length = 0;
 
 			}
+
+			function undo() {
+                if (decals.length > 0){
+                    scene.remove( decals[decals.length -1] );
+                    decals.pop();
+                    //decals.length = decals.length -1;
+                }else{
+                    removeDecals();
+                }
+			}
+
+
 
 			function onWindowResize() {
 
