@@ -12,14 +12,22 @@ http://localhost:8080/
 Checked whats missing.
 Cloned the threejs repo and coppied whats missing to the adequate location mentioned in console errors in developer tools.
 Used "Material files" file browser for transfering iamge files to termux storage.
-
+NOTICE
+    Moved from vim to code-server in ne terminal session
+        code-server 
+        http://127.0.0.1:8080
+        strudlice123
+    and nodejs server in another
+    http-server -a localhost
 TODO
     Enable using other meshes
         Add multiple asset files for different body parts
-    Enable uplaoding custom decals
+    /Enable uplaoding custom decals
         https://stackoverflow.com/questions/50431636/load-texture-from-user-upload-to-geometry-in-three-js
     /Enable rotating details
     /Enable setting decal size
-
+    /Add undo
+    /Clean up interface
+    Remvoe unussed assets
 
 
