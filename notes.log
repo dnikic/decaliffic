@@ -29,5 +29,14 @@ TODO
     /Add undo
     /Clean up interface
     Remvoe unussed assets
-
-
+    Add 3d models of man and woman
+        Use Ctrl+Shift+R when relaoding page to clear previous model from cache.
+        Use previewer to see if your models are allright
+            https://gltf-viewer.donmccurdy.com/
+        Export
+            Make sure your scaling is proper!
+            Models used are 2m tall with a scaling set in webpage of 
+                mesh.scale.set( 10, 10, 10 );
+            In blender select model export as glb, and use the 
+                Include > Limit to > Selected objects in export settings 
+                            

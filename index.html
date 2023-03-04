@@ -53,6 +53,7 @@
 			let mesh;
 			let raycaster;
 			let line;
+			var modelPath = 'models/gltf/custom/man.glb';
 
 			const intersection = {
 				intersects: false,
@@ -100,6 +101,11 @@
 
 					undo();
 
+				},
+				switchModel: function () {
+				removeDecals()
+				switchModel();
+
 				}
 			};
 
@@ -119,20 +125,23 @@
 
 				scene = new THREE.Scene();
 
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-				camera.position.z = 120;
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+				camera.position.z = 200;
+				// camera.position.z = 120;
 
 				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.minDistance = 50;
-				controls.maxDistance = 200;
-
+				controls.minDistance = 5;
+				controls.maxDistance = 1000;
+				
 				scene.add( new THREE.AmbientLight( 0x443333 ) );
-
-				const dirLight1 = new THREE.DirectionalLight( 0xffddcc, 1 );
+				
+				const dirLight1 = new THREE.DirectionalLight( 0x00696b, 1 );
+				// const dirLight1 = new THREE.DirectionalLight( 0xffddcc, 1 );
 				dirLight1.position.set( 1, 0.75, 0.5 );
 				scene.add( dirLight1 );
 
-				const dirLight2 = new THREE.DirectionalLight( 0xccccff, 1 );
+				const dirLight2 = new THREE.DirectionalLight( 0xFA9A50, 1 );
+				// const dirLight2 = new THREE.DirectionalLight( 0xccccff, 1 );
 				dirLight2.position.set( - 1, 0.75, - 0.5 );
 				scene.add( dirLight2 );
 
@@ -142,7 +151,7 @@
 				line = new THREE.Line( geometry, new THREE.LineBasicMaterial() );
 				scene.add( line );
 
-				loadLeePerrySmith();
+				loadCustomModel();
 
 				raycaster = new THREE.Raycaster();
 
@@ -274,7 +283,8 @@
 				const gui = new GUI();
 
 				gui.add( params, 'clear' );
-				gui.add( params, 'scale', 1, 30 );
+				gui.add( params, 'switchModel' );
+				gui.add( params, 'scale', 1, 50 );
 				gui.add( params, 'rotation', -1, 1 );
 				//gui.add( params, 'rotate' );
 				gui.add( params, 'undo' );
@@ -282,25 +292,38 @@
 
 			}
 
-			function loadLeePerrySmith() {
-
+			function loadCustomModel() {
+				
 				const loader = new GLTFLoader();
 
-				loader.load( 'models/gltf/LeePerrySmith/LeePerrySmith.glb', function ( gltf ) {
+				loader.load( modelPath, function ( gltf ) {
+				// loader.load( 'models/gltf/custom/man.glb', function ( gltf ) {
+				// loader.load( 'models/gltf/custom/woman.glb', function ( gltf ) {
+				// loader.load( 'models/gltf/custom/mw.glb', function ( gltf ) {
+				// loader.load( 'models/gltf/LeePerrySmith/LeePerrySmith.glb', function ( gltf ) {
 
 					mesh = gltf.scene.children[ 0 ];
 					mesh.material = new THREE.MeshPhongMaterial( {
 						specular: 0x111111,
-						map: textureLoader.load( 'models/gltf/LeePerrySmith/Map-COL.jpg' ),
-						specularMap: textureLoader.load( 'models/gltf/LeePerrySmith/Map-SPEC.jpg' ),
-						normalMap: textureLoader.load( 'models/gltf/LeePerrySmith/Infinite-Level_02_Tangent_SmoothUV.jpg' ),
+						// map: textureLoader.load( 'models/gltf/LeePerrySmith/Map-COL.jpg' ),
+						// specularMap: textureLoader.load( 'models/gltf/LeePerrySmith/Map-SPEC.jpg' ),
+						// normalMap: textureLoader.load( 'models/gltf/LeePerrySmith/Infinite-Level_02_Tangent_SmoothUV.jpg' ),
 						shininess: 25
 					} );
 
 					scene.add( mesh );
-					mesh.scale.set( 10, 10, 10 );
+					mesh.scale.set( 130, 130, 130 );
+					// mesh.scale.set( 0.010, 0.010, 0.010 );
 
-				} );
+				},
+				// called when loading has errors
+				function ( error ) {
+
+					console.log( 'An error happened',error );
+
+				}
+				
+				);
 
 			}
 
@@ -346,6 +369,22 @@
                 }else{
                     removeDecals();
                 }
+			}
+
+
+			
+
+			function switchModel() {
+				scene.remove( mesh );
+				console.log('1',modelPath)
+				if (modelPath === 'models/gltf/custom/man.glb'){
+					modelPath = 'models/gltf/custom/woman.glb'
+				}else{
+					modelPath = 'models/gltf/custom/man.glb'
+				}
+				console.log('2',modelPath)
+				loadCustomModel()
+
 			}
 
 
